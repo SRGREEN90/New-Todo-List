@@ -7,7 +7,7 @@ export type TaskType = {
     title: string
     isDone: boolean
 }
-
+export type FilterValuesType = 'all' | 'active' | 'completed'
 function App() {
   const todoListTitle: string = 'What to learn?'
 
@@ -18,10 +18,9 @@ function App() {
     {id: 1, title: 'TypeScript', isDone: false},
     {id: 1, title: 'React', isDone: true}
   ]
+    let taskFilter = (ta) =>{
 
-
-
-
+    }
 
   return (
     <div className="App">

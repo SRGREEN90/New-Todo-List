@@ -1,6 +1,7 @@
 import React, {FC} from 'react'
 import {TaskType} from "../App";
-import * as FS from "fs";
+import s from "./TodoList.module.css";
+
 
 type TodolistPropsType = {
     tasks: Array<TaskType>
@@ -22,13 +23,21 @@ const Todolist: FC<TodolistPropsType> = ({tasks, title} ) => {
     })
 
 
-    return <div>
+    return <div >
         <h3 style={{color: 'blue'}}>{title}</h3>
-           <div>
+        <div>
+            <input/>
+            <button>+</button>
+        </div>
+           <div >
                {TasksForRender}
            </div>
-
+        <div>
+            <button >All</button>
+            <button >Active</button>
+            <button >Completed</button>
         </div>
 
+        </div>
 }
 export default Todolist
