@@ -1,12 +1,22 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Todolist from "./components/Todolist";
 
-
+export type TaskType = {
+    id: number
+    title: string
+    isDone: boolean
+}
 
 function App() {
-  const taskInitialState = [
-    {id: 1, }
+  const todoListTitle: string = 'What to learn?'
+
+  const taskInitialState: Array<TaskType> = [
+    {id: 1, title: 'HTML', isDone: true},
+    {id: 1, title: 'CSS', isDone: false},
+    {id: 1, title: 'JS', isDone: false},
+    {id: 1, title: 'TypeScript', isDone: false},
+    {id: 1, title: 'React', isDone: true}
   ]
 
 
@@ -15,6 +25,10 @@ function App() {
 
   return (
     <div className="App">
+       <Todolist
+           tasks ={taskInitialState}
+           title={todoListTitle}
+       />
 
     </div>
   );
