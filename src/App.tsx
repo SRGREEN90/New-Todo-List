@@ -1,24 +1,47 @@
 import React, {useState} from 'react';
 import './App.css';
 import Todolist from "./components/Todolist";
+import {v1} from "uuid";
 
 export type TaskType = {
-    id: number
+    id: string
     title: string
     isDone: boolean
 }
 export type FilterValuesType = 'all' | 'active' | 'completed'
+export type NewTaskStateType = {
+    [key: string]: Array<TaskType>
+}
+export type TodolistType = {
+    id: string
+    title: string
+    filter: string
+}
+
 function App() {
   const todoListTitle: string = 'What to learn?'
-  const taskInitialState: Array<TaskType> = [
-    {id: 1, title: 'HTML', isDone: true},
-    {id: 2, title: 'CSS', isDone: false},
-    {id: 3, title: 'JS', isDone: false},
-    {id: 4, title: 'TypeScript', isDone: false},
-    {id: 5, title: 'React', isDone: true}
-  ]
-
-   const [tasks, setTasks] = useState(taskInitialState)
+    let first: string = v1()
+    let second: string = v1()
+    const [todoLists, setTodoLists] = useState<TodolistType[]>([
+        {id: first, title: 'What to learn?', filter: 'all'},
+        {id: second, title: 'What to buy?', filter: 'all'}
+    ])
+   const [tasks, setTasks] = useState<NewTaskStateType>({
+       [first]: [
+           {id: v1(), title: 'HTML', isDone: true},
+           {id: v1(), title: 'CSS', isDone: false},
+           {id: v1(), title: 'JS', isDone: false},
+           {id: v1(), title: 'TypeScript', isDone: false},
+           {id: v1(), title: 'React', isDone: true}
+       ],
+       [second]: [
+           {id: v1(), title: 'HTML', isDone: true},
+           {id: v1(), title: 'CSS', isDone: false},
+           {id: v1(), title: 'JS', isDone: false},
+           {id: v1(), title: 'TypeScript', isDone: false},
+           {id: v1(), title: 'React', isDone: true}
+       ],
+   })
    const [filter, setFilter] = useState<FilterValuesType>('all')
 //===================Functions=======================
 

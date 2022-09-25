@@ -1,4 +1,4 @@
-import React, {ChangeEvent, FC, useState} from 'react'
+import React, {ChangeEvent, KeyboardEvent, FC, useState} from 'react'
 import {FilterValuesType, TaskType} from "../App";
 import s from "./TodoList.module.css";
 
@@ -23,10 +23,17 @@ const Todolist: FC<TodolistPropsType> = ({
    let [taskTitle, setTaskTitle] = useState<string>('')
 
    let onChangeTitle = (e: ChangeEvent<HTMLInputElement>) => {
-       setTaskTitle(e.target.value)
+       setTaskTitle(e.currentTarget.value)
    }
-    let addTaskTitle = () => addTask(taskTitle)
-
+    let addTaskTitle = () => {
+        addTask(taskTitle)
+        setTaskTitle('')
+    }
+    let onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
+          if(e.key === "Enter"){
+              addTaskTitle()
+          }
+    }
 
     let TasksForRender = tasks.map(t => {
         let onCheckedHandler = (e: ChangeEvent<HTMLInputElement>) => {
@@ -51,8 +58,8 @@ const Todolist: FC<TodolistPropsType> = ({
     return <div>
         <h3 style={{color: 'red'}}>{title}</h3>
         <div>
-            <input onChange={onChangeTitle}/>
-            <button onClick={addTaskTitle}>+</button>
+            <input  value={taskTitle} onKeyPress={onKeyPressHandler} onChange={onChangeTitle}/>
+            <button  onClick={addTaskTitle}>+</button>
         </div>
            <div>
                {TasksForRender}
