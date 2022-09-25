@@ -1,10 +1,10 @@
 import React, {ChangeEvent, KeyboardEvent, FC, useState} from 'react'
-import {FilterValuesType, TaskType} from "../App";
+import {FilterValuesType, NewTaskStateType, TaskType} from "../App";
 import s from "./TodoList.module.css";
 
 
 type TodolistPropsType = {
-    tasks: Array<TaskType>
+    tasks: NewTaskStateType
     title: string
     taskFilter: (filterValue: FilterValuesType) => void
     removeTasks: (id: number)=> void
