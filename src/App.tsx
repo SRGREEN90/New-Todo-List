@@ -22,6 +22,7 @@ function App() {
   const todoListTitle: string = 'What to learn?'
     let first: string = v1()
     let second: string = v1()
+
     const [todoLists, setTodoLists] = useState<TodolistType[]>([
         {id: first, title: 'What to learn?', filter: 'all'},
         {id: second, title: 'What to buy?', filter: 'all'}
@@ -42,13 +43,21 @@ function App() {
            {id: v1(), title: 'React', isDone: true}
        ],
    })
-   const [filter, setFilter] = useState<FilterValuesType>('all')
-//===================Functions=======================
 
+   const [filter, setFilter] = useState<FilterValuesType>('all')
+
+    //===================TodolistFunctions=======================
+    let changeTodolistStatus = (todolistId: string, newFilter: FilterValuesType) => {
+      let updatedTodolists = todoLists.map((tl) => tl.id === todolistId ?
+      {...tl, filter: newFilter }: tl)
+        setTodoLists(updatedTodolists)
+    }
+
+    //===================TaskFunctions=======================
     let taskFilter = (filterValue: FilterValuesType) =>{
         setFilter(filterValue)
     }
-    let removeTasks = (taskId: number) =>{
+    let removeTasks = (taskId: number) => {
        let tasksAfterRemove = tasks.filter(t => t.id !== taskId)
          setTasks(tasksAfterRemove)
     }
