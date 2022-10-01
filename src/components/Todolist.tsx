@@ -5,13 +5,13 @@ import s from "./TodoList.module.css";
 
 type TodolistPropsType = {
     id: string
-    tasks: NewTaskStateType
+    tasks: TaskType[]
     title: string
     changeFilter: (todolistId: string, newFilter: FilterValuesType)=> void
     removeTasks: (taskId: string, todolistId: string)=> void
     addTask: (newTitle: string, todolistId: string) => void
     changeTaskStatus: (taskId: string, newIsDone: boolean, todolistId: string) => void
-    filter: FilterValuesType
+    filter: string
 }
 
 const Todolist: FC<TodolistPropsType> = ({
@@ -29,7 +29,7 @@ const Todolist: FC<TodolistPropsType> = ({
        setTaskTitle(e.currentTarget.value)
    }
     let addTaskTitle = () => {
-        addTask(taskTitle)
+        addTask(taskTitle, id)
         setTaskTitle('')
     }
     let onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
@@ -40,9 +40,9 @@ const Todolist: FC<TodolistPropsType> = ({
 
     let TasksForRender = tasks.map(t => {
         let onCheckedHandler = (e: ChangeEvent<HTMLInputElement>) => {
-            changeTaskStatus(t.id, e.currentTarget.checked)
+            changeTaskStatus(t.id, e.currentTarget.checked, id)
         }
-        let removeTaskHandler = () => removeTasks(t.id)
+        let removeTaskHandler = () => removeTasks(t.id, id)
         return(
             <li key={t.id}>
                 <input
