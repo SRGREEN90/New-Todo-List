@@ -12,6 +12,7 @@ type TodolistPropsType = {
     addTask: (newTitle: string, todolistId: string) => void
     changeTaskStatus: (taskId: string, newIsDone: boolean, todolistId: string) => void
     filter: string
+    removeTodoLists: (todolistId: string) => void
 }
 
 const Todolist: FC<TodolistPropsType> = ({
@@ -21,7 +22,8 @@ const Todolist: FC<TodolistPropsType> = ({
                removeTasks,
                id,
                addTask,
-               changeTaskStatus
+               changeTaskStatus,
+               removeTodoLists
 } ) => {
    let [taskTitle, setTaskTitle] = useState<string>('')
 
@@ -59,7 +61,10 @@ const Todolist: FC<TodolistPropsType> = ({
     })
 
     return <div>
-        <h3 style={{color: 'red'}}>{title}</h3>
+        <h3 style={{color: 'red'}}>
+            {title}
+        <button onClick={()=>removeTodoLists(id)}>x</button>
+        </h3>
         <div>
             <input  value={taskTitle} onKeyPress={onKeyPressHandler} onChange={onChangeTitle}/>
             <button  onClick={addTaskTitle}>+</button>
