@@ -47,7 +47,13 @@ function App() {
        let copyState = todoLists.filter( tl => tl.id !== todolistId )
         setTodoLists(copyState)
     }
-
+    let addTodoLists = () => {
+        const newTodoID = v1()
+        let newTodo:TodolistType = {id: newTodoID, title: 'New TodoList', filter: 'all'}
+        let todoCopy = [...todoLists, newTodo]
+        setTodoLists(todoCopy)
+        setTasks({...tasks, [newTodoID]: [] })
+    }
     //===================TaskFunctions=======================
     let changeFilter= (todolistId: string, newFilter: FilterValuesType) => {
         let updatedTodoLists = todoLists.map((tl) => tl.id === todolistId ?
@@ -97,6 +103,7 @@ function App() {
                     removeTasks={removeTasks}
                     changeFilter={changeFilter}
                     changeTaskStatus={changeTaskStatus}
+                    removeTodoLists={removeTodoLists}
                 />
             </div>
         )
@@ -104,6 +111,7 @@ function App() {
 
   return (
     <div className="App">
+        <button onClick={() => {addTodoLists()}}>Add</button>
         {mappedTodoList}
     </div>
   );
