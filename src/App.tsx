@@ -34,16 +34,19 @@ function App() {
            {id: v1(), title: 'React', isDone: true}
        ],
        [second]: [
-           {id: v1(), title: 'HTML', isDone: true},
-           {id: v1(), title: 'CSS', isDone: false},
-           {id: v1(), title: 'JS', isDone: false},
-           {id: v1(), title: 'TypeScript', isDone: false},
-           {id: v1(), title: 'React', isDone: true}
+           {id: v1(), title: 'Beer', isDone: true},
+           {id: v1(), title: 'Milk', isDone: false},
+           {id: v1(), title: 'Meat', isDone: false},
+           {id: v1(), title: 'Fruits', isDone: false},
+           {id: v1(), title: 'Bread', isDone: true}
        ],
    })
 
     //===================TodolistFunctions=======================
-
+    let removeTodoLists = (todolistId: string) => {
+       let copyState = todoLists.filter( tl => tl.id !== todolistId )
+        setTodoLists(copyState)
+    }
 
     //===================TaskFunctions=======================
     let changeFilter= (todolistId: string, newFilter: FilterValuesType) => {
@@ -71,7 +74,7 @@ function App() {
 
     //======================Render=======================
 
-    const todoListComponents = todoLists.map((tl) => {
+    const mappedTodoList = todoLists.map((tl) => {
 
         let tasksForRender = tasks[tl.id]
         if(tl.filter === "active") {
@@ -101,7 +104,7 @@ function App() {
 
   return (
     <div className="App">
-        {todoListComponents}
+        {mappedTodoList}
     </div>
   );
 }
