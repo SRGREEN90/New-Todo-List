@@ -4,19 +4,22 @@ import s from "./TodoList.module.css";
 
 
 type TodolistPropsType = {
+    id: string
     tasks: NewTaskStateType
     title: string
-    taskFilter: (filterValue: FilterValuesType) => void
-    removeTasks: (id: number)=> void
-    addTask: (newTitle: string) => void
-    changeTaskStatus: (taskId: number, isDone: boolean) => void
+    changeFilter: (todolistId: string, newFilter: FilterValuesType)=> void
+    removeTasks: (taskId: string, todolistId: string)=> void
+    addTask: (newTitle: string, todolistId: string) => void
+    changeTaskStatus: (taskId: string, newIsDone: boolean, todolistId: string) => void
+    filter: FilterValuesType
 }
 
 const Todolist: FC<TodolistPropsType> = ({
                tasks,
                title,
-               taskFilter,
+               changeFilter,
                removeTasks,
+               id,
                addTask,
                changeTaskStatus
 } ) => {
@@ -65,9 +68,9 @@ const Todolist: FC<TodolistPropsType> = ({
                {TasksForRender}
            </div>
         <div>
-            <button onClick={() => taskFilter('all')}>All</button>
-            <button onClick={() => taskFilter('active')}>Active</button>
-            <button onClick={() => taskFilter('completed')}>Completed</button>
+            <button onClick={() => changeFilter(id,'all')}>All</button>
+            <button onClick={() => changeFilter(id,'active')}>Active</button>
+            <button onClick={() => changeFilter(id,'completed')}>Completed</button>
         </div>
 
         </div>
