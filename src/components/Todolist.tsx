@@ -29,6 +29,9 @@ const Todolist: FC<TodolistPropsType> = ({
 } ) => {
 
 
+    let addTaskTitle = (newTitle: string) => {
+        addTask(newTitle, id)
+    }
 
     let TasksForRender = tasks.map(task => {
         let onCheckedHandler = (e: ChangeEvent<HTMLInputElement>) => {
@@ -63,7 +66,7 @@ const Todolist: FC<TodolistPropsType> = ({
         <button onClick={()=>removeTodoLists(id)}>x</button>
         </h3>
         <div>
-            <AddItemForm />
+            <AddItemForm addItem={addTaskTitle}/>
         </div>
            <div>
                {TasksForRender}
