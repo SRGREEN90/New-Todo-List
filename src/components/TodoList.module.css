@@ -1,3 +1,10 @@
 .todo {
 
 }
+.isDone{
+    opacity: 20%;
+}
+
+.active{
+    background-color: #f8da42;
+}
