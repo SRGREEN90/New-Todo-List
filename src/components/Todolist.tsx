@@ -27,28 +27,12 @@ const Todolist: FC<TodolistPropsType> = ({
                removeTodoLists,
                filter,
 } ) => {
-   let [taskTitle, setTaskTitle] = useState<string>('')
-   let [error, setError] = useState<boolean>(false)
 
-   let onChangeTitle = (e: ChangeEvent<HTMLInputElement>) => {
-       setTaskTitle(e.currentTarget.value)
-       setError(false)
-   }
-    let addTaskTitle = () => {
-       const trimmedTitle = taskTitle.trim()
-        if(trimmedTitle) {
-            addTask(trimmedTitle, id)
-        } else {
-            setError(true)
-        }
-        setTaskTitle('')
 
+    let addTaskTitle = (newTitle: string) => {
+        addTask(newTitle, id)
     }
-    let onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
-          if(e.key === "Enter"){
-              addTaskTitle()
-          }
-    }
+
     let TasksForRender = tasks.map(task => {
         let onCheckedHandler = (e: ChangeEvent<HTMLInputElement>) => {
             changeTaskStatus(task.id, e.currentTarget.checked, id)
@@ -70,10 +54,6 @@ const Todolist: FC<TodolistPropsType> = ({
         )
 
     })
-    //=======================errorStyles=========================================
-    const errorClass = error ? s.error : ''
-    const errorMessage = <div style={{color: 'red'}}> Title is required!!!</div>
-
     //=======================btnStyles=========================================
     let btnClass = (newFilter: FilterValuesType) => filter === newFilter ? s.active : ''
     const filterAll = () => changeFilter(id,'all')
@@ -86,7 +66,7 @@ const Todolist: FC<TodolistPropsType> = ({
         <button onClick={()=>removeTodoLists(id)}>x</button>
         </h3>
         <div>
-            <AddItemForm addItem/>
+            <AddItemForm addItem={addTaskTitle}/>
         </div>
            <div>
                {TasksForRender}

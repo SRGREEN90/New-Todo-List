@@ -2,17 +2,17 @@ import React, {ChangeEvent, FC, KeyboardEvent, useState} from "react";
 import s from "./TodoList.module.css";
 
 type AddItemFormPropsType = {
-   addItem: (newTitle: string) => void
+    addItem: (newTitle: string) => void
 }
 
 
-const AddItemForm: FC<AddItemFormPropsType> = (props) => {
+const AddItemForm: FC<AddItemFormPropsType> = ({addItem}) => {
     let [title, setTitle] = useState<string>('')
     let [error, setError] = useState<boolean>(false)
-    let addItem = () => {
+    let addItemTitle = () => {
         const trimmedTitle = title.trim()
         if(trimmedTitle) {
-            props.addItem(trimmedTitle)
+            addItem(trimmedTitle)
         } else {
             setError(true)
         }
@@ -24,7 +24,7 @@ const AddItemForm: FC<AddItemFormPropsType> = (props) => {
     }
     let onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
         if(e.key === "Enter"){
-            addItem()
+            addItemTitle()
         }
     }
     const errorMessage = error
@@ -40,7 +40,7 @@ const AddItemForm: FC<AddItemFormPropsType> = (props) => {
                 className={errorClass}
             />
             {errorMessage}
-            <button  onClick={addItem}>+</button>
+            <button  onClick={addItemTitle}>+</button>
 
     </div>
 }
