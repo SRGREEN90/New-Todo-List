@@ -44,14 +44,12 @@ function App() {
   const [filter, setFilter] = useState<FilterValuesType>('all')
     //===================TodolistFunctions=======================
     let removeTodoLists = (todolistId: string) => {
-       let copyState = todoLists.filter( tl => tl.id !== todolistId )
-        setTodoLists(copyState)
+        setTodoLists(todoLists.filter( tl => tl.id !== todolistId ))
+        delete tasks[todolistId]
     }
     let addTodoLists = () => {
         const newTodoID = v1()
-        let newTodo:TodolistType = {id: newTodoID, title: 'New TodoList', filter: 'all'}
-        let todoCopy = [...todoLists, newTodo]
-        setTodoLists(todoCopy)
+        setTodoLists([...todoLists, {id: newTodoID, title: 'New TodoList', filter: 'all'}])
         setTasks({...tasks, [newTodoID]: [] })
     }
     //===================TaskFunctions=======================
@@ -105,7 +103,6 @@ function App() {
                     changeTaskStatus={changeTaskStatus}
                     removeTodoLists={removeTodoLists}
                     filter={filter}
-                    //setFilter={setFilter}
                 />
             </div>
         )
@@ -113,8 +110,8 @@ function App() {
 
   return (
     <div className="App">
-        <button onClick={() => {addTodoLists()}}>Add</button>
-        {mappedTodoList}
+            <button onClick={() => {addTodoLists()}}>Add</button>
+            {mappedTodoList}
     </div>
   );
 }
