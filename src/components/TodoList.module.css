@@ -8,3 +8,8 @@
 .active{
     background-color: #f8da42;
 }
+
+.error{
+    outline: none;
+    border: 3px solid red;
+}
