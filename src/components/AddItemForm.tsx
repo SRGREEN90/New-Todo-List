@@ -6,13 +6,13 @@ type AddItemFormPropsType = {
 }
 
 
-const AddItemForm: FC<AddItemFormPropsType> = ({addItem}) => {
+const AddItemForm: FC<AddItemFormPropsType> = (props) => {
     let [title, setTitle] = useState<string>('')
     let [error, setError] = useState<boolean>(false)
     let addItemTitle = () => {
         const trimmedTitle = title.trim()
         if(trimmedTitle) {
-            addItem(trimmedTitle)
+            props.addItem(trimmedTitle)
         } else {
             setError(true)
         }

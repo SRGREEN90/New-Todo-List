@@ -1,4 +1,4 @@
-import React, {ChangeEvent, KeyboardEvent, FC, useState} from 'react'
+import React, {ChangeEvent, FC} from 'react'
 import {FilterValuesType, TaskType} from "../App";
 import AddItemForm from './AddItemForm';
 import s from "./TodoList.module.css";
@@ -13,7 +13,7 @@ type TodolistPropsType = {
     addTask: (newTitle: string, todolistId: string) => void
     changeTaskStatus: (taskId: string, newIsDone: boolean, todolistId: string) => void
     removeTodoLists: (todolistId: string) => void
-    filter: FilterValuesType
+    filter: string
 }
 
 const Todolist: FC<TodolistPropsType> = ({
@@ -59,11 +59,13 @@ const Todolist: FC<TodolistPropsType> = ({
     const filterAll = () => changeFilter(id,'all')
     const filterCompleted = () => changeFilter(id,'completed')
     const filterActive = () => changeFilter(id,'active')
+    const removeTodoListsHandler = ()=>removeTodoLists(id)
+
 
     return <div>
         <h3>
             {title}
-            <button onClick={()=>removeTodoLists(id)}>x</button>
+            <button onClick={removeTodoListsHandler}>x</button>
         </h3>
         <div>
             <AddItemForm addItem={addTaskTitle}/>
