@@ -63,7 +63,7 @@ const Todolist: FC<TodolistPropsType> = ({
         <button onClick={()=>removeTodoLists(id)}>x</button>
         </h3>
         <div>
-            <AddItemForm addTask={addTask} id={id}/>
+            <AddItemForm />
         </div>
            <div>
                {TasksForRender}
