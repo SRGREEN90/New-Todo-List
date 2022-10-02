@@ -1,5 +1,5 @@
 import React, {ChangeEvent, KeyboardEvent, FC, useState} from 'react'
-import {FilterValuesType, NewTaskStateType, TaskType} from "../App";
+import {FilterValuesType, TaskType} from "../App";
 import s from "./TodoList.module.css";
 
 
@@ -31,22 +31,23 @@ const Todolist: FC<TodolistPropsType> = ({
 
    let onChangeTitle = (e: ChangeEvent<HTMLInputElement>) => {
        setTaskTitle(e.currentTarget.value)
+       setError(false)
    }
     let addTaskTitle = () => {
        const trimmedTitle = taskTitle.trim()
         if(trimmedTitle) {
             addTask(trimmedTitle, id)
+        } else {
+            setError(true)
         }
-
         setTaskTitle('')
+
     }
     let onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
           if(e.key === "Enter"){
               addTaskTitle()
           }
     }
-    let btnClass = (newFilter: FilterValuesType) => filter === newFilter ? s.active : ''
-
     let TasksForRender = tasks.map(task => {
         let onCheckedHandler = (e: ChangeEvent<HTMLInputElement>) => {
             changeTaskStatus(task.id, e.currentTarget.checked, id)
@@ -68,14 +69,29 @@ const Todolist: FC<TodolistPropsType> = ({
         )
 
     })
+    //=======================errorStyles=========================================
+    const errorClass = error ? s.error : ''
+    const errorMessage = <div style={{color: 'red'}}> Title is required!!!</div>
+
+    //=======================btnStyles=========================================
+    let btnClass = (newFilter: FilterValuesType) => filter === newFilter ? s.active : ''
+    const filterAll = () => changeFilter(id,'all')
+    const filterCompleted = () => changeFilter(id,'completed')
+    const filterActive = () => changeFilter(id,'active')
 
     return <div>
-        <h3 style={{color: 'red'}}>
+        <h3>
             {title}
         <button onClick={()=>removeTodoLists(id)}>x</button>
         </h3>
         <div>
-            <input  value={taskTitle} onKeyPress={onKeyPressHandler} onChange={onChangeTitle}/>
+            <input
+                value={taskTitle}
+                onKeyPress={onKeyPressHandler}
+                onChange={onChangeTitle}
+                className={errorClass}
+            />
+            {error && errorMessage}
             <button  onClick={addTaskTitle}>+</button>
         </div>
            <div>
@@ -83,17 +99,14 @@ const Todolist: FC<TodolistPropsType> = ({
            </div>
         <div>
             <button
-               // className={filter === "all" ? s.active : ''}
                 className={btnClass("all")}
-                onClick={() => changeFilter(id,'all')}>All</button>
+                onClick={filterAll}>All</button>
             <button
-                //className={filter === "active" ? s.active : ''}
                 className={btnClass("active")}
-                onClick={() => changeFilter(id,'active')}>Active</button>
+                onClick={filterActive}>Active</button>
             <button
-                   // className={filter === "completed" ? s.active : ''}
                     className={btnClass("completed")}
-                onClick={() => changeFilter(id,'completed')}>Completed</button>
+                onClick={filterCompleted}>Completed</button>
         </div>
 
         </div>
