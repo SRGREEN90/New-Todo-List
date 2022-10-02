@@ -41,7 +41,7 @@ function App() {
            {id: v1(), title: 'Bread', isDone: true}
        ],
    })
-
+  const [filter, setFilter] = useState<FilterValuesType>('all')
     //===================TodolistFunctions=======================
     let removeTodoLists = (todolistId: string) => {
        let copyState = todoLists.filter( tl => tl.id !== todolistId )
@@ -59,6 +59,7 @@ function App() {
         let updatedTodoLists = todoLists.map((tl) => tl.id === todolistId ?
             {...tl, filter: newFilter }: tl)
         setTodoLists(updatedTodoLists)
+        setFilter(newFilter)
     }
     let removeTasks = (taskId: string, todolistId: string) => {
       const copyState: NewTaskStateType = {...tasks} //делаем копию стейта
@@ -98,12 +99,13 @@ function App() {
                     id={tl.id}
                     title={tl.title}
                     tasks ={tasksForRender}
-                    filter={tl.filter}
                     addTask={addTask}
                     removeTasks={removeTasks}
                     changeFilter={changeFilter}
                     changeTaskStatus={changeTaskStatus}
                     removeTodoLists={removeTodoLists}
+                    filter={filter}
+                    //setFilter={setFilter}
                 />
             </div>
         )
