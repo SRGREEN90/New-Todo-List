@@ -13,24 +13,23 @@ type TodolistPropsType = {
     addTask: (newTitle: string, todolistId: string) => void
     changeTaskStatus: (taskId: string, newIsDone: boolean, todolistId: string) => void
     removeTodoLists: (todolistId: string) => void
-    filter: FilterValuesType
+    filter: string
 }
 
 const Todolist: FC<TodolistPropsType> = ({
-               tasks,
-               title,
-               changeFilter,
-               removeTasks,
-               id,
-               addTask,
-               changeTaskStatus,
-               removeTodoLists,
-               filter,
-} ) => {
-
+                                             tasks,
+                                             title,
+                                             changeFilter,
+                                             removeTasks,
+                                             id,
+                                             addTask,
+                                             changeTaskStatus,
+                                             removeTodoLists,
+                                             filter,
+                                         } ) => {
 
     let addTaskTitle = (newTitle: string) => {
-        addTask(newTitle, id)
+      addTask(newTitle, id)
     }
 
     let TasksForRender = tasks.map(task => {
@@ -54,23 +53,26 @@ const Todolist: FC<TodolistPropsType> = ({
         )
 
     })
+
     //=======================btnStyles=========================================
     let btnClass = (newFilter: FilterValuesType) => filter === newFilter ? s.active : ''
     const filterAll = () => changeFilter(id,'all')
     const filterCompleted = () => changeFilter(id,'completed')
     const filterActive = () => changeFilter(id,'active')
+    const removeTodoListsHandler = ()=>removeTodoLists(id)
+
 
     return <div>
         <h3>
             {title}
-        <button onClick={()=>removeTodoLists(id)}>x</button>
+            <button onClick={removeTodoListsHandler}>x</button>
         </h3>
         <div>
             <AddItemForm addItem={addTaskTitle}/>
         </div>
-           <div>
-               {TasksForRender}
-           </div>
+        <div>
+            {TasksForRender}
+        </div>
         <div>
             <button
                 className={btnClass("all")}
@@ -79,10 +81,10 @@ const Todolist: FC<TodolistPropsType> = ({
                 className={btnClass("active")}
                 onClick={filterActive}>Active</button>
             <button
-                    className={btnClass("completed")}
+                className={btnClass("completed")}
                 onClick={filterCompleted}>Completed</button>
         </div>
 
-        </div>
+    </div>
 }
 export default Todolist

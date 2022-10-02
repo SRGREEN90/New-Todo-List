@@ -54,10 +54,8 @@ function App() {
         setTasks({...tasks, [newTodoID]: [] })
     }
     //===================TaskFunctions=======================
-    let changeFilter= (todolistId: string, newFilter: FilterValuesType) => {
-        let updatedTodoLists = todoLists.map((tl) => tl.id === todolistId ?
-            {...tl, filter: newFilter }: tl)
-        setTodoLists(updatedTodoLists)
+    let changeFilter = (todolistId: string, newFilter: FilterValuesType) => {
+        setTodoLists(todoLists.map((tl) => tl.id === todolistId ? {...tl, filter: newFilter }: tl))
         setFilter(newFilter)
     }
     let removeTasks = (taskId: string, todolistId: string) => {
@@ -103,7 +101,7 @@ function App() {
                     changeFilter={changeFilter}
                     changeTaskStatus={changeTaskStatus}
                     removeTodoLists={removeTodoLists}
-                    filter={filter}
+                    filter={tl.filter}
                 />
             </div>
         )
@@ -112,7 +110,6 @@ function App() {
   return (
     <div className="App">
         <AddItemForm addItem={addTodoLists}/>
-            {/*<button onClick={() => {addTodoLists}}>Add</button>*/}
             {mappedTodoList}
     </div>
   );
