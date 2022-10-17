@@ -6,7 +6,7 @@ import EditableSpan from "../EditableSpan";
 
 
 type TodolistPropsType = {
-    id: string
+    todoId: string
     tasks: TaskType[]
     title: string
     changeFilter: (todolistId: string, newFilter: FilterValuesType)=> void
@@ -15,6 +15,7 @@ type TodolistPropsType = {
     changeTaskStatus: (taskId: string, newIsDone: boolean, todolistId: string) => void
     removeTodoLists: (todolistId: string) => void
     filter: string
+    changeTaskTitle: (taskId: string, todolistId: string, newTitle: string) => void
 }
 
 const Todolist: FC<TodolistPropsType> = ({
@@ -22,23 +23,27 @@ const Todolist: FC<TodolistPropsType> = ({
                                              title,
                                              changeFilter,
                                              removeTasks,
-                                             id,
+                                             todoId,
                                              addTask,
                                              changeTaskStatus,
                                              removeTodoLists,
                                              filter,
+                                             changeTaskTitle
                                          } ) => {
 
     let addTaskTitle = (newTitle: string) => {
-      addTask(newTitle, id)
+      addTask(newTitle, todoId)
     }
 
     let TasksForRender = tasks.map(task => {
         let onCheckedHandler = (e: ChangeEvent<HTMLInputElement>) => {
-            changeTaskStatus(task.id, e.currentTarget.checked, id)
+            changeTaskStatus(task.id, e.currentTarget.checked, todoId)
         }
-        let removeTaskHandler = () => removeTasks(task.id, id)
+        let removeTaskHandler = () => removeTasks(task.id, todoId)
         const getClasses = ( )=> task.isDone ? s.isDone : ''
+        const changeTaskForRenderTitle = (newTitle: string) => {
+            changeTaskTitle(task.id, todoId, newTitle)
+        }
 
         return(
             <li key={task.id} className={getClasses()}>
@@ -48,7 +53,7 @@ const Todolist: FC<TodolistPropsType> = ({
                     onChange={onCheckedHandler}
                 />
                 {/*<span className={getClasses()}>{task.title}</span>*/}
-                <EditableSpan taskTitle={task.title}/>
+                <EditableSpan taskTitle={task.title} changeTitle={changeTaskForRenderTitle}/>
                 <button onClick={removeTaskHandler}>X</button>
             </li>
 
@@ -58,10 +63,10 @@ const Todolist: FC<TodolistPropsType> = ({
 
     //=======================btnStyles=========================================
     let btnClass = (newFilter: FilterValuesType) => filter === newFilter ? s.active : ''
-    const filterAll = () => changeFilter(id,'all')
-    const filterCompleted = () => changeFilter(id,'completed')
-    const filterActive = () => changeFilter(id,'active')
-    const removeTodoListsHandler = ()=>removeTodoLists(id)
+    const filterAll = () => changeFilter(todoId,'all')
+    const filterCompleted = () => changeFilter(todoId,'completed')
+    const filterActive = () => changeFilter(todoId,'active')
+    const removeTodoListsHandler = ()=>removeTodoLists(todoId)
 
 
     return <div>
