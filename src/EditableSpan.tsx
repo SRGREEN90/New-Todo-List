@@ -20,8 +20,7 @@ const EditableSpan: FC<EditableSpanPropsType> = ({taskTitle, changeTitle}) => {
    }
    const onKeyPressEditMode = (e: KeyboardEvent<HTMLInputElement>) => {
        if(e.key === 'Enter' ){
-           changeTitle(title)
-           setEditMode(false)
+           offEditMode()
        }
    }
 
