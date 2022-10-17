@@ -75,6 +75,12 @@ function App() {
         setTasks(copyState)
     }
 
+    let changeTaskTitle = (taskId: string, todolistId: string, newTitle: string) => {
+        const copyState: NewTaskStateType = {...tasks}
+        copyState[todolistId] = tasks[todolistId].map((t)=> t.id === taskId ? {...t, title: newTitle}: t)
+        setTasks(copyState)
+    }
+
 
     //======================Render=======================
 
@@ -93,7 +99,7 @@ function App() {
             <div>
                 <Todolist
                     key={tl.id}
-                    id={tl.id}
+                    todoId={tl.id}
                     title={tl.title}
                     tasks ={tasksForRender}
                     addTask={addTask}
@@ -102,6 +108,7 @@ function App() {
                     changeTaskStatus={changeTaskStatus}
                     removeTodoLists={removeTodoLists}
                     filter={tl.filter}
+                    changeTaskTitle={changeTaskTitle}
                 />
             </div>
         )
