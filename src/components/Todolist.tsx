@@ -2,6 +2,7 @@ import React, {ChangeEvent, FC} from 'react'
 import {FilterValuesType, TaskType} from "../App";
 import AddItemForm from './AddItemForm';
 import s from "./TodoList.module.css";
+import EditableSpan from "../EditableSpan";
 
 
 type TodolistPropsType = {
@@ -40,13 +41,14 @@ const Todolist: FC<TodolistPropsType> = ({
         const getClasses = ( )=> task.isDone ? s.isDone : ''
 
         return(
-            <li key={task.id} >
+            <li key={task.id} className={getClasses()}>
                 <input
                     type='checkbox'
                     checked={task.isDone}
                     onChange={onCheckedHandler}
                 />
-                <span className={getClasses()}>{task.title}</span>
+                {/*<span className={getClasses()}>{task.title}</span>*/}
+                <EditableSpan taskTitle={task.title}/>
                 <button onClick={removeTaskHandler}>X</button>
             </li>
 
