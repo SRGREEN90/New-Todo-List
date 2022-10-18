@@ -1,18 +1,15 @@
 import React, {ChangeEvent, KeyboardEvent, FC, useState} from 'react'
 
 type EditableSpanPropsType = {
-    taskTitle: string
+    someTitle: string
     changeTitle: (title: string) => void
 }
 
-const EditableSpan: FC<EditableSpanPropsType> = ({taskTitle, changeTitle}) => {
+const EditableSpan: FC<EditableSpanPropsType> = ({someTitle, changeTitle}) => {
 
    const [editMode, setEditMode] = useState<boolean>(false)
-   const [title, setTitle] = useState<string>(taskTitle)
-
-    const onChangeTitle = (e: ChangeEvent<HTMLInputElement>) => setTitle(e.currentTarget.value)
-
-
+   const [title, setTitle] = useState<string>(someTitle)
+   const onChangeTitle = (e: ChangeEvent<HTMLInputElement>) => setTitle(e.currentTarget.value)
    const onEditMode = () => setEditMode(true)
    const offEditMode = () => {
        changeTitle(title)
@@ -32,7 +29,7 @@ const EditableSpan: FC<EditableSpanPropsType> = ({taskTitle, changeTitle}) => {
                  onBlur={offEditMode}
                  autoFocus
             />
-        : <span onDoubleClick={onEditMode}>{taskTitle}</span>
+        : <span onDoubleClick={onEditMode}>{someTitle}</span>
     )
 }
 

@@ -16,6 +16,7 @@ type TodolistPropsType = {
     removeTodoLists: (todolistId: string) => void
     filter: string
     changeTaskTitle: (taskId: string, todolistId: string, newTitle: string) => void
+    changeTodolistTitle: (todolistId: string, newTitle: string) => void
 }
 
 const Todolist: FC<TodolistPropsType> = ({
@@ -28,13 +29,16 @@ const Todolist: FC<TodolistPropsType> = ({
                                              changeTaskStatus,
                                              removeTodoLists,
                                              filter,
-                                             changeTaskTitle
+                                             changeTaskTitle,
+                                             changeTodolistTitle
                                          } ) => {
 
     let addTaskTitle = (newTitle: string) => {
       addTask(newTitle, todoId)
     }
-
+    const changeTodolistEditableTitle = (newTitle: string) => {
+        changeTodolistTitle(todoId, newTitle)
+    }
     let TasksForRender = tasks.map(task => {
         let onCheckedHandler = (e: ChangeEvent<HTMLInputElement>) => {
             changeTaskStatus(task.id, e.currentTarget.checked, todoId)
@@ -53,7 +57,7 @@ const Todolist: FC<TodolistPropsType> = ({
                     onChange={onCheckedHandler}
                 />
                 {/*<span className={getClasses()}>{task.title}</span>*/}
-                <EditableSpan taskTitle={task.title} changeTitle={changeTaskForRenderTitle}/>
+                <EditableSpan someTitle={task.title} changeTitle={changeTaskForRenderTitle}/>
                 <button onClick={removeTaskHandler}>X</button>
             </li>
 
@@ -71,7 +75,8 @@ const Todolist: FC<TodolistPropsType> = ({
 
     return <div>
         <h3>
-            {title}
+            <EditableSpan someTitle={title} changeTitle={changeTodolistEditableTitle}/>
+            {/*{title}*/}
             <button onClick={removeTodoListsHandler}>x</button>
         </h3>
         <div>
