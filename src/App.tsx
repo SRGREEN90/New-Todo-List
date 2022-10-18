@@ -53,10 +53,13 @@ function App() {
         setTodoLists([...todoLists, {id: newTodoID, title: newTitle, filter: 'all'}])
         setTasks({...tasks, [newTodoID]: [] })
     }
+    let changeTodolistTitle = (todolistId: string, newTitle: string) => {
+        setTodoLists(todoLists.map((tl) => tl.id === todolistId ? {...tl, title: newTitle }: tl))
+    }
     //===================TaskFunctions=======================
     let changeFilter = (todolistId: string, newFilter: FilterValuesType) => {
         setTodoLists(todoLists.map((tl) => tl.id === todolistId ? {...tl, filter: newFilter }: tl))
-        setFilter(newFilter)
+        // setFilter(newFilter)
     }
     let removeTasks = (taskId: string, todolistId: string) => {
       const copyState: NewTaskStateType = {...tasks} //делаем копию стейта
@@ -109,6 +112,7 @@ function App() {
                     removeTodoLists={removeTodoLists}
                     filter={tl.filter}
                     changeTaskTitle={changeTaskTitle}
+                    changeTodolistTitle={changeTodolistTitle}
                 />
             </div>
         )
