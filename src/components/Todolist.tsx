@@ -3,6 +3,7 @@ import {FilterValuesType, TaskType} from "../App";
 import AddItemForm from './AddItemForm';
 import s from "./TodoList.module.css";
 import EditableSpan from "../EditableSpan";
+import ButtonsBlock from "../ButtonsBlock";
 
 
 type TodolistPropsType = {
@@ -31,7 +32,7 @@ const Todolist: FC<TodolistPropsType> = ({
                                              filter,
                                              changeTaskTitle,
                                              changeTodolistTitle
-                                         } ) => {
+   }) => {
 
     let addTaskTitle = (newTitle: string) => {
       addTask(newTitle, todoId)
@@ -65,13 +66,7 @@ const Todolist: FC<TodolistPropsType> = ({
 
     })
 
-    //=======================btnStyles=========================================
-    let btnClass = (newFilter: FilterValuesType) => filter === newFilter ? s.active : ''
-    const filterAll = () => changeFilter(todoId,'all')
-    const filterCompleted = () => changeFilter(todoId,'completed')
-    const filterActive = () => changeFilter(todoId,'active')
-    const removeTodoListsHandler = ()=>removeTodoLists(todoId)
-
+    const removeTodoListsHandler = () => removeTodoLists(todoId)
 
     return <div>
         <h3>
@@ -85,18 +80,7 @@ const Todolist: FC<TodolistPropsType> = ({
         <div>
             {TasksForRender}
         </div>
-        <div>
-            <button
-                className={btnClass("all")}
-                onClick={filterAll}>All</button>
-            <button
-                className={btnClass("active")}
-                onClick={filterActive}>Active</button>
-            <button
-                className={btnClass("completed")}
-                onClick={filterCompleted}>Completed</button>
-        </div>
-
+        <ButtonsBlock changeFilter={changeFilter} todoId={todoId} filter={filter}/>
     </div>
 }
 export default Todolist
