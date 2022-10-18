@@ -44,6 +44,7 @@ function App() {
    })
   //const [filter, setFilter] = useState<FilterValuesType>('all')
     //===================TodolistFunctions=======================
+
     let removeTodoLists = (todolistId: string) => {
         setTodoLists(todoLists.filter( tl => tl.id !== todolistId ))
         delete tasks[todolistId]
@@ -57,9 +58,9 @@ function App() {
         setTodoLists(todoLists.map((tl) => tl.id === todolistId ? {...tl, title: newTitle }: tl))
     }
     //===================TaskFunctions=======================
+
     let changeFilter = (todolistId: string, newFilter: FilterValuesType) => {
         setTodoLists(todoLists.map((tl) => tl.id === todolistId ? {...tl, filter: newFilter }: tl))
-        // setFilter(newFilter)
     }
     let removeTasks = (taskId: string, todolistId: string) => {
       const copyState: NewTaskStateType = {...tasks} //делаем копию стейта
@@ -77,14 +78,11 @@ function App() {
         copyState[todolistId] = tasks[todolistId].map((t)=> t.id === taskId ? {...t, isDone: newIsDone}: t)
         setTasks(copyState)
     }
-
     let changeTaskTitle = (taskId: string, todolistId: string, newTitle: string) => {
         const copyState: NewTaskStateType = {...tasks}
         copyState[todolistId] = tasks[todolistId].map((t)=> t.id === taskId ? {...t, title: newTitle}: t)
         setTasks(copyState)
     }
-
-
     //======================Render=======================
 
     const mappedTodoList = todoLists.map((tl) => {
