@@ -42,7 +42,7 @@ function App() {
            {id: v1(), title: 'Bread', isDone: true}
        ],
    })
-  const [filter, setFilter] = useState<FilterValuesType>('all')
+  //const [filter, setFilter] = useState<FilterValuesType>('all')
     //===================TodolistFunctions=======================
     let removeTodoLists = (todolistId: string) => {
         setTodoLists(todoLists.filter( tl => tl.id !== todolistId ))
