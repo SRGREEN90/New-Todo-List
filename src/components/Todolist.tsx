@@ -1,4 +1,4 @@
-import React, {ChangeEvent, KeyboardEvent, FC, useState} from 'react'
+import React, {ChangeEvent, FC} from 'react'
 import {FilterValuesType, TaskType} from "../App";
 import AddItemForm from './AddItemForm';
 import s from "./TodoList.module.css";
@@ -15,7 +15,7 @@ type TodolistPropsType = {
     addTask: (newTitle: string, todolistId: string) => void
     changeTaskStatus: (taskId: string, newIsDone: boolean, todolistId: string) => void
     removeTodoLists: (todolistId: string) => void
-    filter: string
+    filter: FilterValuesType
     changeTaskTitle: (taskId: string, todolistId: string, newTitle: string) => void
     changeTodolistTitle: (todolistId: string, newTitle: string) => void
 }
