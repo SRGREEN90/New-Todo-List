@@ -3,6 +3,7 @@ import './App.css';
 import Todolist from "./components/Todolist";
 import {v1} from "uuid";
 import AddItemForm from "./components/AddItemForm";
+import {Paper} from "@material-ui/core";
 
 export type TaskType = {
     id: string
@@ -97,7 +98,7 @@ function App() {
 
 
         return(
-            <div>
+            <Paper elevation={20} style={{padding: "15px"}}>
                 <Todolist
                     key={tl.id}
                     todoId={tl.id}
@@ -112,7 +113,7 @@ function App() {
                     changeTaskTitle={changeTaskTitle}
                     changeTodolistTitle={changeTodolistTitle}
                 />
-            </div>
+            </Paper>
         )
     })
 

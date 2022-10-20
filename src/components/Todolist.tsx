@@ -4,7 +4,9 @@ import AddItemForm from './AddItemForm';
 import s from "./TodoList.module.css";
 import EditableSpan from "../EditableSpan";
 import ButtonsBlock from "../ButtonsBlock";
-
+import {IconButton} from "@material-ui/core";
+import DeleteIcon from '@material-ui/icons/Delete';
+import {Delete} from "@material-ui/icons";
 
 type TodolistPropsType = {
     todoId: string
@@ -55,22 +57,31 @@ const Todolist: FC<TodolistPropsType> = ({
         }
 
         return(
-            <li key={task.id} className={getClasses()}>
+            <li key={task.id}>
                 <input
                     type='checkbox'
                     checked={task.isDone}
                     onChange={onCheckedHandler}
                 />
-                {/*<span className={getClasses()}>{task.title}</span>*/}
-                <EditableSpan someTitle={task.title} changeTitle={changeTaskForRenderTitle}/>
-                <button onClick={removeTaskHandler}>X</button>
+                <span className={getClasses()}>
+                <EditableSpan
+                    someTitle={task.title}
+                    changeTitle={changeTaskForRenderTitle}
+                />
+                </span>
+
+                <IconButton onClick={removeTaskHandler} color={"primary"}>
+                    <DeleteIcon fontSize="small" />
+
+                </IconButton>
+
             </li>
 
         )
 
     })
 
-    return <div>
+    return <div className={s.todoList}>
         <h3>
             <EditableSpan someTitle={title} changeTitle={changeTodolistEditableTitle}/>
             {/*{title}*/}
