@@ -1,5 +1,7 @@
 import React, {ChangeEvent, FC, KeyboardEvent, useState} from "react";
 import s from "./TodoList.module.css";
+import {LibraryAdd} from "@material-ui/icons";
+import {green} from "@material-ui/core/colors";
 
 type AddItemFormPropsType = {
     addItem: (newTitle: string) => void
@@ -31,16 +33,19 @@ const AddItemForm: FC<AddItemFormPropsType> = (props) => {
         ? <div style={{color: 'red'}}> Title is required!!!</div>
         : <div style={{color: 'green'}}>Enter item title!!!</div>
     const errorClass = error ? s.error : ''
-    return<div>
-
+    return<div >
+        <div className={s.add}>
             <input
                 value={title}
                 onKeyPress={onKeyPressHandler}
                 onChange={onChangeTitle}
                 className={errorClass}
             />
+            <LibraryAdd style={{ color: green[500] }}  onClick={addItemTitle}>+</LibraryAdd>
+        </div>
+
             {errorMessage}
-            <button  onClick={addItemTitle}>+</button>
+
 
     </div>
 }

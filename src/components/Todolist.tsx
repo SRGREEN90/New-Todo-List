@@ -4,9 +4,8 @@ import AddItemForm from './AddItemForm';
 import s from "./TodoList.module.css";
 import EditableSpan from "../EditableSpan";
 import ButtonsBlock from "../ButtonsBlock";
-import {IconButton} from "@material-ui/core";
-import DeleteIcon from '@material-ui/icons/Delete';
-import {Delete} from "@material-ui/icons";
+import {Checkbox, IconButton} from "@material-ui/core";
+import {DeleteOutline} from "@material-ui/icons";
 
 type TodolistPropsType = {
     todoId: string
@@ -58,11 +57,18 @@ const Todolist: FC<TodolistPropsType> = ({
 
         return(
             <li key={task.id}>
-                <input
-                    type='checkbox'
+                <Checkbox
+                    color={"primary"}
+                    size={"small"}
                     checked={task.isDone}
                     onChange={onCheckedHandler}
                 />
+
+                {/*<input*/}
+                {/*    type='checkbox'*/}
+                {/*    checked={task.isDone}*/}
+                {/*    onChange={onCheckedHandler}*/}
+                {/*/>*/}
                 <span className={getClasses()}>
                 <EditableSpan
                     someTitle={task.title}
@@ -71,8 +77,7 @@ const Todolist: FC<TodolistPropsType> = ({
                 </span>
 
                 <IconButton onClick={removeTaskHandler} color={"primary"}>
-                    <DeleteIcon fontSize="small" />
-
+                    <DeleteOutline fontSize="small" />
                 </IconButton>
 
             </li>
@@ -85,7 +90,10 @@ const Todolist: FC<TodolistPropsType> = ({
         <h3>
             <EditableSpan someTitle={title} changeTitle={changeTodolistEditableTitle}/>
             {/*{title}*/}
-            <button onClick={removeTodoListsHandler}>x</button>
+            <IconButton onClick={removeTodoListsHandler} color={"primary"}>
+                <DeleteOutline fontSize="small" />
+            </IconButton>
+            {/*<button onClick={removeTodoListsHandler}>x</button>*/}
         </h3>
         <div>
             <AddItemForm addItem={addTaskTitle}/>
