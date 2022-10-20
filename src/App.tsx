@@ -16,7 +16,7 @@ export type NewTaskStateType = {
 export type TodolistType = {
     id: string
     title: string
-    filter: string
+    filter: FilterValuesType
 }
 
 function App() {

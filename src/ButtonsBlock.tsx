@@ -4,38 +4,37 @@ import s from "./components/TodoList.module.css";
 import {Button} from "@material-ui/core";
 
 type ButtonsBlockPropsType = {
-    changeFilter: (todolistId: string, newFilter: FilterValuesType)=> void
-    todoId: string
-    filter: string
+    changeFilter: ( newFilter: FilterValuesType)=> void
+    filter: FilterValuesType
 }
 
 const ButtonsBlock: FC<ButtonsBlockPropsType> = ({changeFilter, todoId, filter}) => {
 
-    let btnClass = (newFilter: FilterValuesType) => filter === newFilter ? s.active : ''
-    const filterAll = () => changeFilter(todoId,'all')
-    const filterCompleted = () => changeFilter(todoId,'completed')
-    const filterActive = () => changeFilter(todoId,'active')
+    // let btnClass = (newFilter: FilterValuesType) => filter === newFilter ? s.active : ''
+    const filterAll = () => changeFilter('all')
+    const filterCompleted = () => changeFilter('completed')
+    const filterActive = () => changeFilter('active')
     return<div>
         <div>
             <Button
                 color="primary"
                 variant="contained"
                 size={'small'}
-                className={btnClass("all")}
+                // className={btnClass("all")}
                 onClick={filterAll}
             >All</Button>
             <Button
                 color="secondary"
                 variant="contained"
                 size={'small'}
-                className={btnClass("active")}
+                // className={btnClass("active")}
                 onClick={filterActive}
             >Active</Button>
             <Button
                 color="default"
                 variant="contained"
                 size={'small'}
-                className={btnClass("completed")}
+                // className={btnClass("completed")}
                 onClick={filterCompleted}
             >Completed</Button>
 
