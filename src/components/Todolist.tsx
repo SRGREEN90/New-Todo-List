@@ -34,12 +34,16 @@ const Todolist: FC<TodolistPropsType> = ({
                                              changeTodolistTitle
    }) => {
 
-    let addTaskTitle = (newTitle: string) => {
+    const addTaskTitle = (newTitle: string) => {
       addTask(newTitle, todoId)
     }
     const changeTodolistEditableTitle = (newTitle: string) => {
         changeTodolistTitle(todoId, newTitle)
     }
+    const removeTodoListsHandler = () => removeTodoLists(todoId)
+    // const setFilterValue = (filter: FilterValuesType) =>
+    //     () => changeFilter(filter, todoId)
+
     let TasksForRender = tasks.map(task => {
         let onCheckedHandler = (e: ChangeEvent<HTMLInputElement>) => {
             changeTaskStatus(task.id, e.currentTarget.checked, todoId)
@@ -65,8 +69,6 @@ const Todolist: FC<TodolistPropsType> = ({
         )
 
     })
-
-    const removeTodoListsHandler = () => removeTodoLists(todoId)
 
     return <div>
         <h3>
