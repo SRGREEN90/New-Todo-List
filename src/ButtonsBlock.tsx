@@ -1,54 +1,61 @@
 import React, { FC } from 'react'
 import {FilterValuesType} from "./App";
 import s from "./components/TodoList.module.css";
-import {Button} from "@material-ui/core";
+import {Button, ButtonGroup} from "@material-ui/core";
 
 type ButtonsBlockPropsType = {
-    changeFilter: ( newFilter: FilterValuesType)=> void
+    changeFilter: (todolistId: string, newFilter: FilterValuesType)=> void
+    todoId: string
     filter: FilterValuesType
 }
 
 const ButtonsBlock: FC<ButtonsBlockPropsType> = ({changeFilter, todoId, filter}) => {
 
-    // let btnClass = (newFilter: FilterValuesType) => filter === newFilter ? s.active : ''
-    const filterAll = () => changeFilter('all')
-    const filterCompleted = () => changeFilter('completed')
-    const filterActive = () => changeFilter('active')
-    return<div>
-        <div>
+    let btnClass = (newFilter: FilterValuesType) => filter === newFilter ? s.active : ''
+    const filterAll = () => changeFilter(todoId,'all')
+    const filterCompleted = () => changeFilter(todoId,'completed')
+    const filterActive = () => changeFilter(todoId,'active')
+
+    return<ButtonGroup variant="contained" size={'small'}>
             <Button
-                color="primary"
-                variant="contained"
-                size={'small'}
-                // className={btnClass("all")}
+                color={filter === 'all' ? "secondary": 'primary'}
+
+
+                className={btnClass("all")}
                 onClick={filterAll}
             >All</Button>
             <Button
-                color="secondary"
-                variant="contained"
-                size={'small'}
-                // className={btnClass("active")}
+                color={filter === 'active' ? "secondary": 'primary'}
+                className={btnClass("active")}
                 onClick={filterActive}
             >Active</Button>
             <Button
-                color="default"
-                variant="contained"
-                size={'small'}
-                // className={btnClass("completed")}
+                color={filter === 'completed' ? "secondary": 'primary'}
+                className={btnClass("completed")}
                 onClick={filterCompleted}
             >Completed</Button>
-
-            {/*<button*/}
-            {/*    className={btnClass("all")}*/}
-            {/*    onClick={filterAll}>All</button>*/}
-            {/*<button*/}
-            {/*    className={btnClass("active")}*/}
-            {/*    onClick={filterActive}>Active</button>*/}
-            {/*<button*/}
-            {/*    className={btnClass("completed")}*/}
-            {/*    onClick={filterCompleted}>Completed</button>*/}
-        </div>
-    </div>
+    </ButtonGroup>
 }
 
 export default ButtonsBlock
+
+
+
+
+
+
+
+
+
+
+
+
+{/*<button*/}
+{/*    className={btnClass("all")}*/}
+{/*    onClick={filterAll}>All</button>*/}
+{/*<button*/}
+{/*    className={btnClass("active")}*/}
+{/*    onClick={filterActive}>Active</button>*/}
+{/*<button*/}
+{/*    className={btnClass("completed")}*/}
+{/*    onClick={filterCompleted}>Completed</button>*/}
