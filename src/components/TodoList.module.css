@@ -17,3 +17,7 @@
 .todoList{
     width: 230px;
 }
+.add{
+    display: flex;
+    flex-direction: row;
+}
