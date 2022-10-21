@@ -4,9 +4,9 @@ import AddItemForm from './AddItemForm';
 import s from "./TodoList.module.css";
 import EditableSpan from "../EditableSpan";
 import ButtonsBlock from "../ButtonsBlock";
-import {Checkbox, IconButton} from "@material-ui/core";
+import {Checkbox, IconButton, List, ListItem} from "@material-ui/core";
 import {DeleteOutline} from "@material-ui/icons";
-
+import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 type TodolistPropsType = {
     todoId: string
     tasks: TaskType[]
@@ -56,19 +56,13 @@ const Todolist: FC<TodolistPropsType> = ({
         }
 
         return(
-            <li key={task.id}>
+            <ListItem divider key={task.id}>
                 <Checkbox
                     color={"primary"}
                     size={"small"}
                     checked={task.isDone}
                     onChange={onCheckedHandler}
                 />
-
-                {/*<input*/}
-                {/*    type='checkbox'*/}
-                {/*    checked={task.isDone}*/}
-                {/*    onChange={onCheckedHandler}*/}
-                {/*/>*/}
                 <span className={getClasses()}>
                 <EditableSpan
                     someTitle={task.title}
@@ -77,30 +71,31 @@ const Todolist: FC<TodolistPropsType> = ({
                 </span>
 
                 <IconButton onClick={removeTaskHandler} color={"primary"}>
-                    <DeleteOutline fontSize="small" />
+                    <HighlightOffIcon fontSize="medium" />
                 </IconButton>
 
-            </li>
+            </ListItem>
 
         )
 
     })
 
     return <div className={s.todoList}>
-        <h3>
-            <EditableSpan someTitle={title} changeTitle={changeTodolistEditableTitle}/>
-            {/*{title}*/}
-            <IconButton onClick={removeTodoListsHandler} color={"primary"}>
-                <DeleteOutline fontSize="small" />
-            </IconButton>
-            {/*<button onClick={removeTodoListsHandler}>x</button>*/}
-        </h3>
+        <div style={{textAlign: "center"}}>
+            <h3>
+                <EditableSpan someTitle={title} changeTitle={changeTodolistEditableTitle}/>
+                <IconButton onClick={removeTodoListsHandler} color={"primary"}>
+                    <DeleteOutline fontSize="medium" />
+                </IconButton>
+            </h3>
+        </div>
+
         <div>
             <AddItemForm addItem={addTaskTitle}/>
         </div>
-        <div>
+        <List>
             {TasksForRender}
-        </div>
+        </List>
         <ButtonsBlock changeFilter={changeFilter} todoId={todoId} filter={filter}/>
     </div>
 }
