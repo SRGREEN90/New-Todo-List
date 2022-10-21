@@ -3,7 +3,8 @@ import './App.css';
 import Todolist from "./components/Todolist";
 import {v1} from "uuid";
 import AddItemForm from "./components/AddItemForm";
-import {Paper} from "@material-ui/core";
+import {AppBar, Button, IconButton, Paper, Toolbar, Typography} from "@material-ui/core";
+import {Menu} from "@material-ui/icons";
 
 export type TaskType = {
     id: string
@@ -119,6 +120,19 @@ function App() {
 
   return (
     <div className="App">
+        <AppBar position={"static"}>
+            <Toolbar style={{justifyContent: "space-between"}}>
+                <IconButton edge="start" color="inherit" aria-label="menu">
+                    <Menu/>
+                </IconButton>
+                <Typography variant="h6">
+                    Todolist
+                </Typography>
+                <Button color="inherit" variant={"outlined"}>
+                    Login
+                </Button>
+            </Toolbar>
+        </AppBar>
         <AddItemForm addItem={addTodoLists}/>
             {mappedTodoList}
     </div>
