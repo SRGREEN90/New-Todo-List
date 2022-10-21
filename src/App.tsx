@@ -3,7 +3,7 @@ import './App.css';
 import Todolist from "./components/Todolist";
 import {v1} from "uuid";
 import AddItemForm from "./components/AddItemForm";
-import {AppBar, Button, IconButton, Paper, Toolbar, Typography} from "@material-ui/core";
+import {AppBar, Button, Container, Grid, IconButton, Paper, Toolbar, Typography} from "@material-ui/core";
 import {Menu} from "@material-ui/icons";
 
 export type TaskType = {
@@ -99,22 +99,27 @@ function App() {
 
 
         return(
-            <Paper elevation={20} style={{padding: "15px"}}>
-                <Todolist
-                    key={tl.id}
-                    todoId={tl.id}
-                    title={tl.title}
-                    tasks ={tasksForRender}
-                    addTask={addTask}
-                    removeTasks={removeTasks}
-                    changeFilter={changeFilter}
-                    changeTaskStatus={changeTaskStatus}
-                    removeTodoLists={removeTodoLists}
-                    filter={tl.filter}
-                    changeTaskTitle={changeTaskTitle}
-                    changeTodolistTitle={changeTodolistTitle}
-                />
-            </Paper>
+            <Grid item={true} key={tl.id}>
+                <Paper
+                    elevation={20}
+                    style={{padding: "15px"}}
+                >
+                    <Todolist
+                        todoId={tl.id}
+                        title={tl.title}
+                        tasks ={tasksForRender}
+                        addTask={addTask}
+                        removeTasks={removeTasks}
+                        changeFilter={changeFilter}
+                        changeTaskStatus={changeTaskStatus}
+                        removeTodoLists={removeTodoLists}
+                        filter={tl.filter}
+                        changeTaskTitle={changeTaskTitle}
+                        changeTodolistTitle={changeTodolistTitle}
+                    />
+                </Paper>
+            </Grid>
+
         )
     })
 
@@ -133,8 +138,16 @@ function App() {
                 </Button>
             </Toolbar>
         </AppBar>
-        <AddItemForm addItem={addTodoLists}/>
-            {mappedTodoList}
+        <Container fixed>
+
+            <Grid container={true} style={{padding: "25px 0"}} justifyContent={"center"}>
+                <AddItemForm addItem={addTodoLists}/>
+            </Grid>
+            <Grid container={true} spacing={6} justifyContent={"center"}>
+                {mappedTodoList}
+            </Grid>
+
+        </Container>
     </div>
   );
 }
