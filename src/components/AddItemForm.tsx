@@ -31,7 +31,7 @@ const AddItemForm: FC<AddItemFormPropsType> = (props) => {
         }
     }
 
-    return<div >
+    return<div>
         <div className={s.add}>
             <TextField
                 value={title}
