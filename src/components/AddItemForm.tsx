@@ -30,13 +30,9 @@ const AddItemForm: FC<AddItemFormPropsType> = (props) => {
             addItemTitle()
         }
     }
-    const errorMessage = error
-        ? <div style={{color: 'red'}}> Title is required!!!</div>
-        : <div style={{color: 'green'}}>Enter item title!!!</div>
-    const errorClass = error ? s.error : ''
+
     return<div >
         <div className={s.add}>
-
             <TextField
                 value={title}
                 onKeyPress={onKeyPressHandler}
@@ -44,21 +40,39 @@ const AddItemForm: FC<AddItemFormPropsType> = (props) => {
                 variant={"outlined"}
                 label={"Title"}
                 size={"small"}
+                error={error}
+                helperText={error && "Title is required!"}
             />
-
-            {/*<input*/}
-            {/*    value={title}*/}
-            {/*    onKeyPress={onKeyPressHandler}*/}
-            {/*    onChange={onChangeTitle}*/}
-            {/*    className={errorClass}*/}
-            {/*/>*/}
-            <LibraryAdd style={{ color: green[500] }}  onClick={addItemTitle}>+</LibraryAdd>
+            <LibraryAdd
+                style={{ color: green[500] }}
+                onClick={addItemTitle}>+
+            </LibraryAdd>
         </div>
-
-            {errorMessage}
-
-
     </div>
 }
-
 export default AddItemForm
+
+
+
+
+
+
+
+
+
+
+
+
+// const errorMessage = error
+//     ? <div style={{color: 'red'}}> Title is required!!!</div>
+//     : <div style={{color: 'green'}}>Enter item title!!!</div>
+// const errorClass = error ? s.error : ''
+
+{/*<input*/}
+{/*    value={title}*/}
+{/*    onKeyPress={onKeyPressHandler}*/}
+{/*    onChange={onChangeTitle}*/}
+{/*    className={errorClass}*/}
+{/*/>*/}
+
+{/*{errorMessage}*/}
