@@ -56,24 +56,27 @@ const Todolist: FC<TodolistPropsType> = ({
         }
 
         return(
-            <ListItem divider key={task.id}>
-                <Checkbox
-                    color={"primary"}
-                    size={"small"}
-                    checked={task.isDone}
-                    onChange={onCheckedHandler}
-                />
-                <span className={getClasses()}>
+            <ListItem  divider key={task.id}>
+                <div >
+                    <Checkbox
+                        color={"primary"}
+                        size={"small"}
+                        checked={task.isDone}
+                        onChange={onCheckedHandler}
+                    />
+                    <span className={getClasses()}>
                 <EditableSpan
                     someTitle={task.title}
                     changeTitle={changeTaskForRenderTitle}
                 />
                 </span>
+                </div>
+               <div>
+                   <IconButton onClick={removeTaskHandler} color={"primary"}>
+                       <HighlightOffIcon fontSize="medium" />
+                   </IconButton>
 
-                <IconButton onClick={removeTaskHandler} color={"primary"}>
-                    <HighlightOffIcon fontSize="medium" />
-                </IconButton>
-
+               </div>
             </ListItem>
 
         )
