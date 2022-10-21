@@ -2,6 +2,7 @@ import React, {ChangeEvent, FC, KeyboardEvent, useState} from "react";
 import s from "./TodoList.module.css";
 import {LibraryAdd} from "@material-ui/icons";
 import {green} from "@material-ui/core/colors";
+import {TextField} from "@material-ui/core";
 
 type AddItemFormPropsType = {
     addItem: (newTitle: string) => void
@@ -35,12 +36,22 @@ const AddItemForm: FC<AddItemFormPropsType> = (props) => {
     const errorClass = error ? s.error : ''
     return<div >
         <div className={s.add}>
-            <input
+
+            <TextField
                 value={title}
                 onKeyPress={onKeyPressHandler}
                 onChange={onChangeTitle}
-                className={errorClass}
+                variant={"outlined"}
+                label={"Title"}
+                size={"small"}
             />
+
+            {/*<input*/}
+            {/*    value={title}*/}
+            {/*    onKeyPress={onKeyPressHandler}*/}
+            {/*    onChange={onChangeTitle}*/}
+            {/*    className={errorClass}*/}
+            {/*/>*/}
             <LibraryAdd style={{ color: green[500] }}  onClick={addItemTitle}>+</LibraryAdd>
         </div>
 
