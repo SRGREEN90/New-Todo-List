@@ -19,8 +19,6 @@ const ButtonsBlock: FC<ButtonsBlockPropsType> = ({changeFilter, todoId, filter})
     return<ButtonGroup variant="contained" size={'small'}>
             <Button
                 color={filter === 'all' ? "secondary": 'primary'}
-
-
                 className={btnClass("all")}
                 onClick={filterAll}
             >All</Button>
@@ -38,24 +36,3 @@ const ButtonsBlock: FC<ButtonsBlockPropsType> = ({changeFilter, todoId, filter})
 }
 
 export default ButtonsBlock
-
-
-
-
-
-
-
-
-
-
-
-
-{/*<button*/}
-{/*    className={btnClass("all")}*/}
-{/*    onClick={filterAll}>All</button>*/}
-{/*<button*/}
-{/*    className={btnClass("active")}*/}
-{/*    onClick={filterActive}>Active</button>*/}
-{/*<button*/}
-{/*    className={btnClass("completed")}*/}
-{/*    onClick={filterCompleted}>Completed</button>*/}
