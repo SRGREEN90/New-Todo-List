@@ -31,16 +31,13 @@ function App() {
     ])
    const [tasks, setTasks] = useState<NewTaskStateType>({
        [first]: [
-           {id: v1(), title: 'HTML', isDone: true},
-           {id: v1(), title: 'CSS', isDone: false},
            {id: v1(), title: 'JS', isDone: false},
            {id: v1(), title: 'TypeScript', isDone: false},
            {id: v1(), title: 'React', isDone: true}
        ],
        [second]: [
-           {id: v1(), title: 'Beer', isDone: true},
+
            {id: v1(), title: 'Milk', isDone: false},
-           {id: v1(), title: 'Meat', isDone: false},
            {id: v1(), title: 'Fruits', isDone: false},
            {id: v1(), title: 'Bread', isDone: true}
        ],
